@@ -29,7 +29,7 @@ CyberSafe AI is an intelligent chatbot that helps everyday users stay safe onlin
 
 - **Frontend:** Streamlit
 - **Backend:** Python
-- **AI Model:** Google Gemini 1.5 Flash
+- **AI Model:** Google Gemini 2.5 Flash Lite
 - **Knowledge Base:** PDF FAQs
 - **Libraries:** google-genai, python-dotenv, PyPDF2
 
