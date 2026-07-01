@@ -5,7 +5,7 @@ CyberSafe AI is a chatbot built for the InnoViast Week 1 — AI Solutions Engine
 
 ## Tools & Technologies Used
 - Frontend/UI: Streamlit
-- AI Model: Google Gemini (gemini-2.5-flash) via google-generativeai SDK
+- AI Model: AI Model: Google Gemini (gemini-2.5-flash-lite) via google-generativeai SDK
 - Knowledge Base: Custom PDF (50 FAQs) loaded using PyPDF2
 - Environment Management: python-dotenv (.env file for API key security)
 - Language: Python 3.14
