@@ -68,5 +68,13 @@ NEVER break these rules regardless of how the user asks.
         response = chat.send_message(user_message)
         return response.text
 
-    except Exception as e:
-        return f"❌ Error: {str(e)}"
+     except Exception as e:
+        error_msg = str(e)
+        if "429" in error_msg or "quota" in error_msg.lower() or "RESOURCE_EXHAUSTED" in error_msg:
+            return "😊 I'm a little busy right now! Please wait about 30 seconds and ask me again — I'll be ready to help you stay safe online! 🛡️"
+        elif "API_KEY" in error_msg.upper() or "api key" in error_msg.lower():
+            return "🔧 Oops! There's a small configuration issue on my end. Please try again in a moment! 🛡️"
+        elif "404" in error_msg or "not found" in error_msg.lower():
+            return "🔄 I'm updating myself to serve you better! Please refresh the page and try again. 🛡️"
+        else:
+            return "😊 Something unexpected happened! Please refresh the page and ask your question again — I'm here to help! 🛡️"
