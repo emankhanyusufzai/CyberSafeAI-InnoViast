@@ -1,5 +1,5 @@
 # app.py
-# CyberSafe AI - Main Streamlit Application (v4 Final)
+# CyberSafe AI - Main Streamlit Application (v5 Mobile Responsive)
 
 import streamlit as st
 from utils.chatbot import get_response
@@ -41,9 +41,15 @@ st.markdown("""
     #MainMenu, footer { visibility: hidden; }
     [data-testid="stToolbar"] { visibility: hidden !important; }
     [data-testid="stDecoration"] { visibility: hidden !important; }
-    .block-container { padding-top: 1rem !important; padding-bottom: 2.5rem !important; }
 
-    /* Kill the empty header bar gap at the very top */
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 2.5rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        max-width: 100% !important;
+    }
+
     header[data-testid="stHeader"] {
         height: 0 !important;
         min-height: 0 !important;
@@ -51,12 +57,9 @@ st.markdown("""
     }
     [data-testid="stAppViewContainer"] { padding-top: 0 !important; }
 
-    /* Hide the little chain-link "copy anchor" icon next to headings */
-    h1 a, h2 a, h3 a, h1 svg, h2 svg, h3 svg {
-        display: none !important;
-    }
+    h1 a, h2 a, h3 a, h1 svg, h2 svg, h3 svg { display: none !important; }
 
-    /* ── 1️⃣ Sidebar — slim width, won't fight Streamlit's collapse/expand ── */
+    /* ── Sidebar ── */
     [data-testid="stSidebar"] {
         background-color: var(--cyber-surface) !important;
         border-right: 1px solid var(--cyber-border) !important;
@@ -158,7 +161,7 @@ st.markdown("""
         box-shadow: 0 0 6px var(--cyber-green); animation: pulse-dot 2s infinite;
     }
 
-    /* ── Main Header ── */
+    /* ── Main Header — mobile responsive ── */
     .main-header { text-align: center; padding: 6px 0 14px; }
     .main-header .title-badge {
         display: inline-flex; align-items: center; gap: 10px;
@@ -172,7 +175,8 @@ st.markdown("""
         box-shadow: 0 0 6px var(--cyber-green); animation: pulse-dot 2s infinite;
     }
     .main-header h1 {
-        font-size: 3.2em !important; font-weight: 800 !important;
+        font-size: clamp(1.8em, 5vw, 3.2em) !important;
+        font-weight: 800 !important;
         color: var(--cyber-heading) !important; letter-spacing: -1px !important;
         margin: 0 0 6px !important; line-height: 1.05 !important;
     }
@@ -180,17 +184,21 @@ st.markdown("""
         color: var(--cyber-accent);
         text-shadow: 0 0 30px rgba(0,212,255,0.55), 0 0 60px rgba(0,212,255,0.2);
     }
-    .main-header .subtitle { font-size: 14px; color: var(--cyber-muted); margin: 0 0 12px; }
+    .main-header .subtitle {
+        font-size: clamp(11px, 2.5vw, 14px);
+        color: var(--cyber-muted); margin: 0 0 12px;
+    }
 
-    /* ── Status Panel ── */
+    /* ── Status Panel — wraps on mobile ── */
     .status-panel {
-        display: flex; align-items: center; justify-content: center; gap: 20px;
+        display: flex; align-items: center; justify-content: center;
+        flex-wrap: wrap; gap: 10px 20px;
         background: rgba(0,255,136,0.04); border: 1px solid rgba(0,255,136,0.15);
-        border-radius: 12px; padding: 10px 24px; margin-bottom: 16px;
+        border-radius: 12px; padding: 10px 16px; margin-bottom: 16px;
     }
     .status-item {
         display: flex; align-items: center; gap: 6px;
-        font-size: 12px; color: var(--cyber-green); font-weight: 600;
+        font-size: clamp(10px, 2vw, 12px); color: var(--cyber-green); font-weight: 600;
     }
     .status-item .si-dot {
         width: 6px; height: 6px; background: var(--cyber-green); border-radius: 50%;
@@ -198,54 +206,65 @@ st.markdown("""
     }
     .status-sep { color: var(--cyber-border); font-size: 14px; }
 
-    /* ── 4️⃣ Welcome Screen — hides when chat starts ── */
-    .welcome-screen { text-align: center; padding: 20px 20px 0; }
+    /* ── Welcome Screen — mobile responsive grid ── */
+    .welcome-screen { text-align: center; padding: 20px 8px 0; }
     .welcome-screen .icon-ring {
-        width: 90px; height: 90px;
+        width: 80px; height: 80px;
         background: radial-gradient(circle at center, rgba(0,212,255,0.10) 0%, rgba(0,212,255,0.01) 70%);
         border: 1.5px solid rgba(0,212,255,0.28); border-radius: 50%;
         display: inline-flex; align-items: center; justify-content: center;
-        font-size: 42px; margin-bottom: 14px;
+        font-size: 38px; margin-bottom: 14px;
         animation: shield-glow 4s ease-in-out infinite;
     }
     @keyframes shield-glow {
         0%,100% { box-shadow: 0 0 20px rgba(0,212,255,0.12), 0 0 50px rgba(0,212,255,0.05); }
         50% { box-shadow: 0 0 28px rgba(0,212,255,0.22), 0 0 70px rgba(0,212,255,0.09); }
     }
-    .welcome-screen h3 { font-size: 20px; color: var(--cyber-heading); font-weight: 700; margin: 0 0 5px; }
+    .welcome-screen h3 {
+        font-size: clamp(15px, 4vw, 20px);
+        color: var(--cyber-heading); font-weight: 700; margin: 0 0 5px;
+    }
     .welcome-screen h3 a, .welcome-screen h3 a svg { display: none !important; }
-    .welcome-screen .welcome-sub { font-size: 13px; color: var(--cyber-muted); margin: 0 0 18px; font-style: italic; }
+    .welcome-screen .welcome-sub {
+        font-size: clamp(11px, 2.5vw, 13px);
+        color: var(--cyber-muted); margin: 0 0 18px; font-style: italic;
+    }
 
+    /* Mobile: 2 cols instead of 3 */
     .capabilities-grid {
-        display: grid; grid-template-columns: repeat(3, 1fr);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px; max-width: 560px; margin: 0 auto 16px; text-align: left;
     }
     .cap-card {
         background: var(--cyber-panel); border: 1px solid var(--cyber-border);
-        border-radius: 10px; padding: 11px 13px;
-        display: flex; align-items: center; gap: 9px;
-        font-size: 12.5px; color: var(--cyber-text); font-weight: 500;
-        transition: border-color 0.2s; cursor: default;
+        border-radius: 10px; padding: 10px 12px;
+        display: flex; align-items: center; gap: 8px;
+        font-size: clamp(11px, 2vw, 12.5px); color: var(--cyber-text); font-weight: 500;
+        transition: border-color 0.2s;
     }
     .cap-card:hover { border-color: var(--cyber-accent); }
-    .cap-card .cap-icon { font-size: 18px; flex-shrink: 0; }
-    .welcome-cta { font-size: 13px; color: var(--cyber-accent); font-weight: 500; padding: 4px 0 0; margin-bottom: 0; }
-
-    /* ── 3️⃣ Chat Bubbles — WhatsApp style ── */
-    .chat-wrap {
-        background: var(--cyber-surface); border: 1px solid var(--cyber-border);
-        border-radius: 16px; padding: 20px 24px; margin-bottom: 16px;
+    .cap-card .cap-icon { font-size: 16px; flex-shrink: 0; }
+    .welcome-cta {
+        font-size: clamp(11px, 2.5vw, 13px);
+        color: var(--cyber-accent); font-weight: 500; padding: 4px 0 0; margin-bottom: 0;
     }
 
-    /* User bubble — right aligned, blue */
+    /* ── Chat Bubbles ── */
+    .chat-wrap {
+        background: var(--cyber-surface); border: 1px solid var(--cyber-border);
+        border-radius: 16px; padding: 16px; margin-bottom: 16px;
+    }
+
     .user-message-wrap { display: flex; justify-content: flex-end; margin: 10px 0; }
     .user-message {
         background: linear-gradient(135deg, #0d3a7a, #0a52c4);
-        color: #d0e8ff; padding: 12px 16px;
+        color: #d0e8ff; padding: 11px 15px;
         border-radius: 18px 18px 4px 18px;
-        max-width: 72%; font-size: 14px; line-height: 1.65;
+        max-width: 85%; font-size: clamp(13px, 3vw, 14px); line-height: 1.65;
         border: 1px solid rgba(0,102,255,0.4);
         box-shadow: 0 3px 16px rgba(10,82,196,0.3);
+        word-break: break-word;
     }
     .user-message .msg-label {
         font-size: 10px; font-weight: 700; letter-spacing: 1px;
@@ -253,15 +272,15 @@ st.markdown("""
         display: flex; align-items: center; gap: 5px; justify-content: flex-end;
     }
 
-    /* AI bubble — left aligned, dark */
     .bot-message-wrap { display: flex; justify-content: flex-start; margin: 10px 0; }
     .bot-message {
         background: var(--cyber-card); color: var(--cyber-text);
-        padding: 13px 17px; border-radius: 4px 18px 18px 18px;
-        max-width: 84%; font-size: 14px; line-height: 1.75;
+        padding: 12px 15px; border-radius: 4px 18px 18px 18px;
+        max-width: 90%; font-size: clamp(13px, 3vw, 14px); line-height: 1.75;
         border: 1px solid var(--cyber-border);
         border-left: 3px solid var(--cyber-accent);
         box-shadow: 0 3px 16px rgba(0,0,0,0.3);
+        word-break: break-word;
     }
     .bot-message .msg-label {
         font-size: 10px; font-weight: 700; letter-spacing: 1px;
@@ -278,18 +297,18 @@ st.markdown("""
     .bot-message code {
         font-family: 'JetBrains Mono', monospace;
         background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);
-        padding: 1px 5px; border-radius: 4px; font-size: 12.5px; color: var(--cyber-accent);
+        padding: 1px 5px; border-radius: 4px; font-size: 12px; color: var(--cyber-accent);
     }
     .bot-message strong { color: var(--cyber-heading); font-weight: 600; }
 
     /* Typing indicator */
     .typing-indicator {
-        display: flex; align-items: center; gap: 12px; padding: 13px 17px;
+        display: flex; align-items: center; gap: 12px; padding: 12px 15px;
         background: var(--cyber-card); border: 1px solid var(--cyber-border);
         border-left: 3px solid var(--cyber-accent);
         border-radius: 4px 18px 18px 18px; max-width: 200px; margin: 10px 0;
     }
-    .typing-indicator .ti-label { font-size: 12.5px; color: var(--cyber-accent); font-weight: 500; }
+    .typing-indicator .ti-label { font-size: 12px; color: var(--cyber-accent); font-weight: 500; }
     .typing-dots { display:flex; gap:5px; align-items:center; }
     .typing-dots span {
         width:7px; height:7px; background:var(--cyber-accent); border-radius:50%;
@@ -302,7 +321,12 @@ st.markdown("""
     }
 
     /* Risk badges */
-    .risk-badge-wrap { display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius:8px; margin:8px 0; font-size:13px; }
+    .risk-badge-wrap {
+        display:flex; align-items:center; gap:10px;
+        padding:8px 14px; border-radius:8px; margin:8px 0;
+        font-size: clamp(11px, 2.5vw, 13px);
+        flex-wrap: wrap;
+    }
     .risk-badge-wrap.high { background:rgba(255,51,85,0.1); border:1px solid rgba(255,51,85,0.3); }
     .risk-badge-wrap.medium { background:rgba(255,136,0,0.1); border:1px solid rgba(255,136,0,0.3); }
     .risk-pill { padding:3px 12px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
@@ -310,101 +334,116 @@ st.markdown("""
     .risk-pill.medium { background:var(--cyber-orange); color:#fff; }
     .risk-msg { color:var(--cyber-muted); }
 
-    /* ── Input row — exact spec: 60px height, 82/18 split, 15px gap, centered ── */
+    /* ── Input Row — mobile: stacks vertically on small screens ── */
     .input-row { margin: 0 auto !important; max-width: 1100px !important; }
     .input-row div[data-testid="stHorizontalBlock"] {
-        gap: 15px !important;
+        gap: 10px !important;
         align-items: center !important;
+        flex-wrap: nowrap !important;
     }
     .input-row div[data-testid="column"]:nth-of-type(1) {
-        flex: 0 0 82% !important;
-        max-width: 82% !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
         padding: 0 !important;
         display: flex !important;
         align-items: center !important;
     }
     .input-row div[data-testid="column"]:nth-of-type(2) {
-        flex: 0 0 18% !important;
-        max-width: 18% !important;
+        flex: 0 0 100px !important;
+        max-width: 100px !important;
         padding: 0 !important;
         display: flex !important;
         align-items: center !important;
     }
     .input-row div[data-testid="stVerticalBlock"] {
-        gap: 0 !important;
-        width: 100% !important;
+        gap: 0 !important; width: 100% !important;
     }
     .input-row div[data-testid="stElementContainer"] {
-        margin: 0 !important;
-        width: 100% !important;
+        margin: 0 !important; width: 100% !important;
     }
 
-    /* ── Input box — fixed 60px on every wrapper layer ── */
+    /* Input box */
     .stTextInput { margin: 0 !important; }
-    .stTextInput > div {
-        height: 60px !important;
-    }
+    .stTextInput > div { height: 52px !important; }
     .stTextInput > div > div {
-        height: 60px !important;
-        display: flex !important;
-        align-items: center !important;
+        height: 52px !important; display: flex !important; align-items: center !important;
     }
     .stTextInput > div > div > input {
         background: var(--cyber-panel) !important; color: var(--cyber-text) !important;
         border: 1px solid var(--cyber-border) !important; border-radius: 12px !important;
-        padding: 0 20px !important; font-size: 15px !important;
-        height: 60px !important; line-height: 60px !important; box-sizing: border-box !important;
-        font-family: 'Inter', sans-serif !important; transition: border-color 0.25s, box-shadow 0.25s !important;
+        padding: 0 16px !important; font-size: clamp(13px, 3vw, 15px) !important;
+        height: 52px !important; line-height: 52px !important; box-sizing: border-box !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: border-color 0.25s, box-shadow 0.25s !important;
+        width: 100% !important;
     }
     .stTextInput > div > div > input:focus {
         border-color: var(--cyber-accent) !important;
         box-shadow: 0 0 0 3px rgba(0,212,255,0.18), 0 0 16px rgba(0,212,255,0.12) !important;
     }
     .stTextInput > div > div > input::placeholder {
-        color: #6a9abf !important; opacity: 1 !important; font-size: 15px !important;
+        color: #6a9abf !important; opacity: 1 !important;
+        font-size: clamp(12px, 2.5vw, 14px) !important;
     }
     .stTextInput label { display: none !important; }
 
-    /* ── Send Button — exact same 60px height as input ── */
+    /* Send Button */
     .send-btn { margin: 0 !important; width: 100% !important; }
     .send-btn div[data-testid="stButton"] { margin: 0 !important; width: 100% !important; }
     .send-btn button {
         background: linear-gradient(90deg, #00C6FF, #0072FF) !important;
         color: #fff !important; border: none !important; border-radius: 12px !important;
-        font-weight: 700 !important; font-size: 15px !important;
-        height: 60px !important; min-height: 60px !important; max-height: 60px !important; width: 100% !important;
-        box-sizing: border-box !important; letter-spacing: 0.3px !important;
+        font-weight: 700 !important; font-size: clamp(13px, 3vw, 15px) !important;
+        height: 52px !important; min-height: 52px !important; max-height: 52px !important;
+        width: 100% !important; box-sizing: border-box !important;
         margin: 0 !important; padding: 0 !important;
         display: flex !important; align-items: center !important; justify-content: center !important;
         box-shadow: 0 4px 18px rgba(0,114,255,0.35) !important;
         transition: all 0.3s ease !important;
+        white-space: nowrap !important;
     }
     .send-btn button p {
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        line-height: 1 !important;
-        color: #fff !important;
+        margin: 0 !important; padding: 0 !important;
+        font-size: clamp(13px, 3vw, 15px) !important;
+        font-weight: 700 !important; line-height: 1 !important; color: #fff !important;
     }
     .send-btn button:hover {
         background: linear-gradient(90deg, #00d4ff, #0072FF) !important;
         box-shadow: 0 0 22px rgba(0,212,255,0.8), 0 4px 26px rgba(0,114,255,0.45) !important;
-        transform: translateY(-2px) !important;
-        color: #fff !important;
+        transform: translateY(-2px) !important; color: #fff !important;
     }
 
     .privacy-notice {
         display: flex; align-items: center; justify-content: center; gap: 6px;
         font-size: 11px; color: var(--cyber-muted); margin-top: 7px;
+        text-align: center;
     }
 
-    /* Footer */
     .cyber-footer {
-        text-align:center; padding:14px 0 18px; font-size:11.5px; color:var(--cyber-muted);
-        letter-spacing:0.5px; display:flex; align-items:center; justify-content:center; gap:8px;
+        text-align:center; padding:14px 0 18px;
+        font-size: clamp(10px, 2vw, 11.5px); color:var(--cyber-muted);
+        letter-spacing:0.5px; display:flex; align-items:center;
+        justify-content:center; gap:8px; flex-wrap: wrap;
     }
     .cyber-footer .dot { color:var(--cyber-border); }
+
+    /* ── Mobile breakpoint ── */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+        }
+        .secure-badge { top: 10px; right: 10px; padding: 4px 10px; font-size: 10px; }
+        .capabilities-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+        .status-sep { display: none; }
+        .chat-wrap { padding: 12px 10px; }
+        .user-message, .bot-message { max-width: 95%; font-size: 13px; }
+        .input-row div[data-testid="column"]:nth-of-type(2) {
+            flex: 0 0 80px !important;
+            max-width: 80px !important;
+        }
+        .send-btn button { font-size: 13px !important; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -489,7 +528,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── 4️⃣ Welcome hides when chat starts ────────────────────────
+# ── Welcome hides when chat starts ────────────────────────────
 if not st.session_state.messages:
     st.markdown("""
     <div class="welcome-screen">
@@ -508,7 +547,6 @@ if not st.session_state.messages:
     </div>
     """, unsafe_allow_html=True)
 else:
-    # ── 3️⃣ Chat Bubbles — WhatsApp style ──
     st.markdown('<div class="chat-wrap">', unsafe_allow_html=True)
     for message in st.session_state.messages:
         if message["role"] == "user":
@@ -531,9 +569,9 @@ else:
             """, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ── Input Area — same line, equal height, bottom aligned ──────
+# ── Input Area ────────────────────────────────────────────────
 st.markdown('<div class="input-row">', unsafe_allow_html=True)
-col1, col2 = st.columns([4.6, 1], vertical_alignment="center")
+col1, col2 = st.columns([5, 1], vertical_alignment="center")
 
 with col1:
     user_input = st.text_input(
@@ -546,7 +584,7 @@ with col1:
 
 with col2:
     st.markdown('<div class="send-btn">', unsafe_allow_html=True)
-    send_clicked = st.button("✈ Send", use_container_width=True)
+    send_clicked = st.button("Send ✈", use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
