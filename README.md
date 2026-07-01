@@ -39,3 +39,20 @@ CyberSafe AI is an intelligent chatbot that helps everyday users stay safe onlin
 ## 🚀 Setup Instructions
 
 ### 1. Clone the repository
+
+## 📸 Screenshots
+
+### Welcome Screen
+![Welcome Screen](assets/screenshots/screenshot-1-welcome.png)
+
+### Cybersecurity Q&A
+![Phishing Answer](assets/screenshots/screenshot-2-phishing.png)
+
+### PDF Knowledge Base
+![PDF Knowledge](assets/screenshots/screenshot-3-pdf-knowledge.png)
+
+### Out-of-Scope Handling
+![Out of Scope](assets/screenshots/screenshot-4-out-of-scope.png)
+
+### Risk Checker
+![Risk Checker](assets/screenshots/screenshot-5-risk-checker.png)
